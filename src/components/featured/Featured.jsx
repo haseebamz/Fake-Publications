@@ -8,8 +8,8 @@ import styles from "./Featured.module.css";
 function Featured() {
   const [featured, setFeatured] = useState([]);
 
-  const API_KEY = "D9E37AF8-2184-4464-AC1B-7DFA2A3DFF56";
-  const BASE_URL = "/api/Product/featuredlist?IsNew=true&IsFeatured=true"; // proxied path
+  const API_KEY = import.meta.env.VITE_API_KEY;;
+  const BASE_URL = "/api/Product/featuredlist?IsNew=true&IsFeatured=true"; 
 
   async function fetchFeatured() {
     try {
@@ -26,7 +26,7 @@ function Featured() {
       }
 
       const data = await response.json();
-      console.log("Fetched data:", data);
+      // console.log("Fetched data:", data);
       setFeatured(data.Data);
     } catch (error) {
       console.error("Fetch error:", error);
