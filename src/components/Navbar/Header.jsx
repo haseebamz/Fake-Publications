@@ -54,17 +54,17 @@ function Header() {
                 </Link>
               </li>
             </ul>
-            <Link to="/Sign-in" className="redBtn" >Sign In</Link>
+            <Link to="/Login" className="redBtn" >LOGIN</Link>
           </div>
         </div>
       </nav>
 
 
-      <Routes >
+      {/* <Routes >
         <Route path="/" element={<Home />} ></Route>
         <Route path="/ContactUs" element={ <ContactUs />  } ></Route>
         <Route path="/Media" element={ <Media /> } ></Route>
-      </Routes>
+      </Routes> */}
     </div>
   );
 }

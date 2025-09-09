@@ -67,6 +67,8 @@ body {
 .wrapper {
   overflow: hidden;
   padding-top: 56px;
+  height: 100vh;
+  overflow-y: scroll;
 }
 .CustomBtn {
   background-color: var(--white);
@@ -75,7 +77,17 @@ body {
   font-size: 15px;
   border-radius: 8px;
   border: 1px solid var(--primary-color);
-  display: inline-block;
+  display: block !important ;
+}
+.CustomBtn:hover, .btnBgPrimary {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+.login_formBtn {
+    min-width: 210px;
+    margin: 0 auto;
+    text-transform: uppercase;
+    display: block;
 }
 
 .allCards {
@@ -143,6 +155,16 @@ body {
   padding-top: 1rem;
   padding-bottom: 0.5rem;
   font-size: 1rem;
+}
+
+
+/* inputs style  */
+.input-fields {
+      height: 36px;
+    border: none;
+}
+label{
+  display: block !important ;
 }
 @media (min-width: 768px) {
   .allCards {

@@ -17,7 +17,7 @@ function CategoryHome() {
     lowerSecondaryDescription: "",
   });
 
-  const API_KEY = "D9E37AF8-2184-4464-AC1B-7DFA2A3DFF56";
+  const API_KEY = import.meta.env.VITE_API_KEY;;
   const BASE_URL = "/api/Product/landingpageproductlist"; // proxied path
 
   async function fetchProductList() {
@@ -35,7 +35,7 @@ function CategoryHome() {
       }
 
       const data = await response.json();
-      console.log("Fetched data:", data);
+      // console.log("Fetched data:", data);
 
       const entryTestCategory = data.Data.find(
         (item) => item.Category.CategoryName === "ENTRY TEST"
