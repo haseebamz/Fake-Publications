@@ -3,13 +3,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import styles from "./Featured.module.css";
-
+import axios from "axios";
+// import useCart from "../../hooks/useCart";
 
 function Featured() {
   const [featured, setFeatured] = useState([]);
+  const [loading, setLoading] = useState(true)
 
-  const API_KEY = import.meta.env.VITE_API_KEY;;
-  const BASE_URL = "/api/Product/featuredlist?IsNew=true&IsFeatured=true"; 
+  const API_KEY = import.meta.env.VITE_API_KEY;
+  const BASE_URL = "/api/Product/featuredlist?IsNew=true&IsFeatured=true";
 
   async function fetchFeatured() {
     try {
@@ -30,6 +32,8 @@ function Featured() {
       setFeatured(data.Data);
     } catch (error) {
       console.error("Fetch error:", error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -73,24 +77,56 @@ function Featured() {
     ],
   };
 
+  const addToCart = async (item) => {
+    const payLoad = {
+      ProductId: item.ProductId,
+      ProductDetailId: 45798,
+      Quantity: 1,
+      SessionId: 6478924,
+    };
+
+    console.log("Cart clicked", item.ProductName);
+
+    try {
+      const response = await axios.post("/api/Cart/add/guest?", payLoad, {
+        headers: {
+          "api-security-key": API_KEY,
+          accept: "application/json",
+        },
+      });
+      console.log("API response", response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
-      <section className={styles.featuredWrap} >
+      <section className={styles.featuredWrap}>
         <div className="container">
-          <h2 className="text-center" >Featured Products</h2>
-          <Slider {...settings}>
+          <h2 className="text-center">Featured Products</h2>
+          {loading ? <div>Loading...</div> :  <Slider {...settings}>
             {featured.map((item) => (
-
-
               <div className="allCards featuredCard" key={item.ProductId}>
-                {item.IsNewProduct ? <span className="newTag" >New</span> : "" }  
+                {item.IsNewProduct ? <span className="newTag">New</span> : ""}
                 <div className="cardImgWrap">
-                <img src={item.ThumbnailImagePath} alt="" width={255} height={296} />
+                  <img
+                    src={item.ThumbnailImagePath}
+                    alt=""
+                    width={255}
+                    height={296}
+                  />
                 </div>
-                <span className="productName" >{item.ProductName}</span>
+                <div className="d-flex align-items-center">
+                  <span className="productName">{item.ProductName}</span>
+                  <span className="cartPlus" onClick={() => addToCart(item)}>
+                    +
+                  </span>
+                </div>
               </div>
             ))}
-          </Slider>
+          </Slider> }
+         
         </div>
       </section>
     </div>

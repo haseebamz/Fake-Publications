@@ -166,6 +166,17 @@ body {
 label{
   display: block !important ;
 }
+.cartPlus {
+  color: var(--primary-color) ;
+  font-weight: 700;
+  font-size: 20px;
+  border: 2px solid var(--primary-color);
+  max-width: fit-content;
+  line-height: 15px;
+    padding: 1px 4px 5px 4px;
+  border-radius: 10px;
+  max-height: fit-content;
+}
 @media (min-width: 768px) {
   .allCards {
     width: auto;
